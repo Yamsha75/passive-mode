@@ -1,0 +1,31 @@
+<meta>
+    <info author="yamsha@dzakub.com" type="script" name="player-aggression-manager"
+        version="1.0.0" description="resource managing player aggression, disabling
+            it for/against selected players and punishing for abusive behaviour" />
+    <!-- <min_mta_version client="1.5.6" server="1.5.6" /> -->
+    <oop>true</oop>
+
+    <script src="s_events.lua" type="server" />
+    <script src="c_events.lua" type="client" />
+
+    <script src="assert.lua" type="shared" />
+    <script src="constants.lua" type="shared" />
+    <script src="utils.lua" type="shared" />
+    <script src="shared.lua" type="shared" />
+
+    <script src="safe-zones/server.lua" type="server" />
+    <script src="safe-zones/client.lua" type="client" />
+
+    <script src="passive-mode/settings.lua" type="shared" />
+    <script src="passive-mode/constants.lua" type="shared" />
+    <script src="passive-mode/shared.lua" type="shared" />
+
+    <script src="passive-mode/server.lua" type="server" />
+
+    <script src="passive-mode/client.lua" type="client" />
+    <script src="passive-mode/collisions.lua" type="client" />
+
+    <export function="createSafeZone" type="server" />
+
+    <script src="debug.lua" type="server" />
+</meta>
