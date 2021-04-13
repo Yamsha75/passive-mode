@@ -1,22 +1,3 @@
-local function colShapeDestroyHandler()
-    if source.type ~= "colshape" then return end
-
-    local safezone = next(getElementsByType(SAFEZONE, source))
-    if not safezone then return end
-
-    local colDimension = colshape.dimension
-    for _, element in ipairs(getElementsWithinColShape(source)) do
-        if canElementBePassive(element.type) and element.dimension == colDimension then
-            triggerEvent("onSafeZoneExit", safezone, element)
-        end
-    end
-end
-addEventHandler("onElementDestroy", root, colShapeDestroyHandler)
-
---------------------
--- MAIN FUNCTIONS --
---------------------
-
 local PASSIVE_ELEMENT_TYPES = getSetFromList(COLLISION_ELEMENT_TYPES)
 
 local function canElementTypeBePassive(elementType)
@@ -35,6 +16,18 @@ local function colShapeLeaveEventHandler(element, matchingDimension)
     end
 end
 
+local function colShapeDestroyHandler()
+    local colshape = source.parent
+    if not colshape or getElementType(colshape) ~= "colshape" then return false end
+
+    local colDimension = colshape.dimension
+    for _, element in ipairs(getElementsWithinColShape(colshape)) do
+        if canElementBePassive(element.type) and element.dimension == colDimension then
+            triggerEvent("onSafeZoneExit", source, element)
+        end
+    end
+end
+
 function createSafeZone(colshape)
     if next(getElementsByType(SAFEZONE, colshape)) then return false end
 
@@ -43,6 +36,7 @@ function createSafeZone(colshape)
 
     addEventHandler("onColShapeHit", safezone, colShapeHitEventHandler)
     addEventHandler("onColShapeLeave", safezone, colShapeLeaveEventHandler)
+    addEventHandler("onElementDestroy", safezone, colShapeDestroyHandler)
 
     -- trigger "onSafeZoneEnter" event for elements initially within colshape
     local colDimension = colshape.dimension
