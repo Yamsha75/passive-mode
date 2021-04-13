@@ -1,10 +1,14 @@
 local function colShapeDestroyHandler()
     if source.type ~= "colshape" then return end
 
-    local colshapeDimension = source.dimension
+    local safezone = next(getElementsByType(SAFEZONE, source))
+    if not safezone then return end
+
+    local colDimension = colshape.dimension
     for _, element in ipairs(getElementsWithinColShape(source)) do
-        local matchingDimension = (colshapeDimension == element.dimension)
-        triggerEvent("onColShapeLeave", source, element, matchingDimension)
+        if canElementBePassive(element.type) and element.dimension == colDimension then
+            triggerEvent("onSafeZoneExit", safezone, element)
+        end
     end
 end
 addEventHandler("onElementDestroy", root, colShapeDestroyHandler)
