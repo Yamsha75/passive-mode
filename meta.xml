@@ -26,6 +26,4 @@
     <script src="passive-mode/collisions.lua" type="client" />
 
     <export function="createSafeZone" type="server" />
-
-    <script src="debug.lua" type="server" />
 </meta>
