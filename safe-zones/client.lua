@@ -1,13 +1,13 @@
-local function colShapeDestroyHandler()
-    if source.type ~= "colshape" then return end
+-- local function colShapeDestroyHandler()
+--     if source.type ~= "colshape" then return end
 
-    local colshapeDimension = source.dimension
-    for _, element in ipairs(getElementsWithinColShape(source)) do
-        local matchingDimension = (colshapeDimension == element.dimension)
-        triggerEvent("onClientColShapeLeave", source, element, matchingDimension)
-    end
-end
-addEventHandler("onClientElementDestroy", root, colShapeDestroyHandler)
+--     local colshapeDimension = source.dimension
+--     for _, element in ipairs(getElementsWithinColShape(source)) do
+--         local matchingDimension = (colshapeDimension == element.dimension)
+--         triggerEvent("onClientColShapeLeave", source, element, matchingDimension)
+--     end
+-- end
+-- addEventHandler("onClientElementDestroy", root, colShapeDestroyHandler)
 
 -- local function colShapeHitEventHandler(element, matchingDimension)
 --     print(inspect(element), matchingDimension)
