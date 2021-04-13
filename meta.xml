@@ -14,6 +14,7 @@
     <script src="shared.lua" type="shared" />
 
     <script src="safe-zones/server.lua" type="server" />
+    <script src="safe-zones/enter-exit.lua" type="server" />
     <script src="safe-zones/client.lua" type="client" />
 
     <script src="passive-mode/settings.lua" type="shared" />
