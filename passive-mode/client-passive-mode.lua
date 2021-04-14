@@ -36,10 +36,6 @@ function setElementPassive(element, enabled)
 end
 
 local function passiveModeChangeHandler(enabled)
-    if source == localPlayer then
-        print("CLIENT: now " .. (enabled and "" or "not ") .. "enabled")
-    end
-
     local elementType = getElementType(source)
     if elementType == "vehicle" then
         setVehiclePassiveEnabled(source, enabled)
