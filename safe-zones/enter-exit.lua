@@ -27,7 +27,7 @@ end
 addEventHandler("onSafeZoneExit", root, safeZoneLeaveHandler)
 
 function elementDestroyHandler()
-    if canElementTypeBePassive(source.type) then elementSafeZoneCount[source] = nil end
+    elementSafeZoneCount[source] = nil
 end
 addEventHandler("onElementDestroy", root, elementDestroyHandler)
 
