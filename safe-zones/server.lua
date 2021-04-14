@@ -5,24 +5,25 @@ local function canElementTypeBePassive(elementType)
 end
 
 local function colShapeHitEventHandler(element, matchingDimension)
-    if matchingDimension and canElementTypeBePassive(element.type) then
+    if matchingDimension and canElementTypeBePassive(getElementType(element)) then
         triggerEvent("onSafeZoneEnter", this, element)
     end
 end
 
 local function colShapeLeaveEventHandler(element, matchingDimension)
-    if matchingDimension and canElementTypeBePassive(element.type) then
+    if matchingDimension and canElementTypeBePassive(getElementType(element)) then
         triggerEvent("onSafeZoneExit", this, element)
     end
 end
 
 local function colShapeDestroyHandler()
-    local colshape = source.parent
+    local colshape = getElementParent(source)
     if not colshape or getElementType(colshape) ~= "colshape" then return false end
 
-    local colDimension = colshape.dimension
+    local colDimension = getElementDimension(colshape)
     for _, element in ipairs(getElementsWithinColShape(colshape)) do
-        if canElementBePassive(element.type) and element.dimension == colDimension then
+        if canElementBePassive(getElementType(element)) and
+                getElementDimension(element) == colDimension then
             triggerEvent("onSafeZoneExit", source, element)
         end
     end
@@ -32,16 +33,17 @@ function createSafeZone(colshape)
     if next(getElementsByType(SAFEZONE, colshape)) then return false end
 
     local safezone = createElement(SAFEZONE)
-    safezone.parent = colshape
+    setElementParent(safezone, colshape)
 
     addEventHandler("onColShapeHit", safezone, colShapeHitEventHandler)
     addEventHandler("onColShapeLeave", safezone, colShapeLeaveEventHandler)
     addEventHandler("onElementDestroy", safezone, colShapeDestroyHandler)
 
     -- trigger "onSafeZoneEnter" event for elements initially within colshape
-    local colDimension = colshape.dimension
+    local colDimension = getElementDimension(colshape)
     for _, element in ipairs(getElementsWithinColShape(colshape)) do
-        if canElementTypeBePassive(element.type) and element.dimension == colDimension then
+        if canElementBePassive(getElementType(element)) and
+                getElementDimension(element) == colDimension then
             triggerEvent("onSafeZoneEnter", safezone, element)
         end
     end

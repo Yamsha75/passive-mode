@@ -129,7 +129,7 @@ addEventHandler("onClientExplosion", root, explosionHandler)
 function safelyDetonateProjectile(projectile)
     assertArgumentType(projectile, "projectile")
 
-    setElementPosition(projectile, PROJECTILE_DETONATION_POSITION)
+    setElementPosition(projectile, unpack(PROJECTILE_DETONATION_POSITION))
     setProjectileCounter(projectile, 0)
     destroyElement(projectile)
 

@@ -22,7 +22,7 @@ function isPositionInASafeZone(x, y, z)
     assertArgumentType(z, "number", 3)
 
     for _, safezone in ipairs(getElementsByType(SAFEZONE)) do
-        if isInsideColShape(safezone.parent, x, y, z) then return true end
+        if isInsideColShape(getElementParent(safezone), x, y, z) then return true end
     end
 
     return false
