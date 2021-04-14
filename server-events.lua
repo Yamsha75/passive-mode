@@ -1,4 +1,5 @@
 addEvent("onSafeZoneEnter")
+addEvent("onElementSafeZoneEnter")
 addEvent("onSafeZoneExit")
 
 addEvent("onElementPassiveModeChange")

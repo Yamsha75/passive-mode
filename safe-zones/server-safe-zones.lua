@@ -1,5 +1,8 @@
 local function colShapeHitHandler(element, matchingDimension)
-    if matchingDimension then triggerEvent("onSafeZoneEnter", this, element) end
+    if matchingDimension then
+        triggerEvent("onSafeZoneEnter", this, element)
+        triggerEvent("onElementSafeZoneEnter", element, this)
+    end
 end
 
 local function colShapeLeaveHandler(element, matchingDimension)
