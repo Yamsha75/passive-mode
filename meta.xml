@@ -22,6 +22,7 @@
     <script src="passive-mode/client-passive-mode.lua" type="client" />
     <script src="passive-mode/client-collisions.lua" type="client" />
     <script src="passive-mode/client-aggression.lua" type="client" />
+    <script src="passive-mode/client-projectiles.lua" type="client" />
     <script src="passive-mode/client-sync.lua" type="client" />
 
     <!-- safe-zones -->

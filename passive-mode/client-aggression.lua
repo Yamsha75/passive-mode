@@ -35,21 +35,6 @@ local function explosionHandler(x, y, z, explosionType)
 end
 addEventHandler("onClientExplosion", root, explosionHandler)
 
-function safelyDetonateProjectile(projectile)
-    assertArgumentType(projectile, "projectile")
-
-    setElementPosition(projectile, unpack(PROJECTILE_DETONATION_POSITION))
-    setProjectileCounter(projectile, 0)
-    destroyElement(projectile)
-
-    return true
-end
-
-local function projectileCreationHandler(creator)
-    if isElementPassive(creator) then safelyDetonateProjectile(source) end
-end
-addEventHandler("onClientProjectileCreation", root, projectileCreationHandler)
-
 local function localPlayerDamageHandler(attacker)
     if passiveEnabled then cancelEvent() end
 end
