@@ -28,7 +28,9 @@ function createElementKeyedTable()
     local table = {}
 
     local function clearElementFromTable()
-        table[source] = nil
+        if source ~= nil then
+            table[source] = nil
+        end
     end
 
     if CLIENTSIDE then
