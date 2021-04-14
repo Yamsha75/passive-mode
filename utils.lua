@@ -23,3 +23,21 @@ function getSetFromList(list)
 
     return set
 end
+
+function createElementKeyedTable()
+    local table = {}
+
+    local function clearElementFromTable()
+        table[source] = nil
+    end
+
+    if CLIENTSIDE then
+        addEventHandler("onClientElementDestroy", root, clearElementFromTable)
+        addEventHandler("onClientPlayerQuit", root, clearElementFromTable)
+    else
+        addEventHandler("onElementDestroy", root, clearElementFromTable)
+        addEventHandler("onPlayerQuit", root, clearElementFromTable)
+    end
+
+    return table
+end

@@ -1,37 +1,28 @@
-local elementSafeZoneCount = {}
+local elementSafeZoneCount = createElementKeyedTable()
 
-function updateElementSafeZone(element, n)
-    local currentCount = elementSafeZoneCount[element] or 0
-    local newCount = currentCount + n
+local function safeZoneHitHandler(element)
+    if not canElementBePassive(element) then return end
+
+    local oldCount = elementSafeZoneCount[element] or 0
+    local newCount = oldCount + 1
     elementSafeZoneCount[element] = newCount
 
-    if currentCount == 0 and newCount > 0 then
-        if not isElementPassive(element) and canElementBePassive(element) then
-            setElementPassive(element, true)
-        end
-    elseif newCount == 0 and currentCount > 0 then
-        if isElementPassive(element) and canElementBeNotPassive(element) then
-            setElementPassive(element, false)
-        end
-    end
+    if oldCount == 0 then setElementPassive(element, true) end
 end
 
-function safeZoneHitHandler(element, matchingDimension)
-    updateElementSafeZone(element, 1)
-end
-addEventHandler("onSafeZoneEnter", root, safeZoneHitHandler)
+local function safeZoneLeaveHandler(element)
+    if not canElementBePassive(element) then return end
 
-function safeZoneLeaveHandler(element, matchingDimension)
-    updateElementSafeZone(element, -1)
-end
-addEventHandler("onSafeZoneExit", root, safeZoneLeaveHandler)
+    local oldCount = elementSafeZoneCount[element] or 0
+    local newCount = oldCount - 1
 
-function elementDestroyHandler()
-    elementSafeZoneCount[source] = nil
+    if newCount == 0 then setElementPassive(element, false) end
 end
-addEventHandler("onElementDestroy", root, elementDestroyHandler)
 
-function playerQuitHandler()
-    elementSafeZoneCount[source] = nil
+if SERVERSIDE then
+    addEventHandler("onSafeZoneEnter", root, safeZoneHitHandler)
+    addEventHandler("onSafeZoneExit", root, safeZoneLeaveHandler)
+else
+    addEventHandler("onClientSafeZoneEnter", root, safeZoneHitHandler)
+    addEventHandler("onClientSafeZoneExit", root, safeZoneLeaveHandler)
 end
-addEventHandler("onPlayerQuit", root, playerQuitHandler)
