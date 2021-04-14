@@ -7,8 +7,11 @@ local function colShapeLeaveHandler(element, matchingDimension)
 end
 
 local function safeZoneDestroyHandler()
-    local colShapeDimension = getElementDimension(source)
-    for _, element in ipairs(getElementsWithinColShape(source)) do
+    local colshape = getElementParent(source)
+    if not colshape or getElementType(colshape) ~= "colshape" then return false end
+
+    local colShapeDimension = getElementDimension(colshape)
+    for _, element in ipairs(getElementsWithinColShape(colshape)) do
         if getElementDimension(element) == colShapeDimension then
             triggerEvent("onSafeZoneExit", source, element)
         end
