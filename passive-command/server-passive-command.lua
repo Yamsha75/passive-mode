@@ -85,3 +85,12 @@ local function importedResourceStartHandler(resourceName)
 end
 addEventHandler("onImportedResourceStart", resourceRoot, importedResourceStartHandler)
 addEventHandler("onImportedResourceRestart", resourceRoot, importedResourceStartHandler)
+
+local function resourceStopHandler()
+    if imports.passive then
+        for player, _ in pairs(passiveCommandPlayers) do
+            imports.passive.removePassiveRequest(player, PASSIVE_REQUEST_KEY)
+        end
+    end
+end
+addEventHandler("onResourceStop", resourceRoot, resourceStopHandler)
