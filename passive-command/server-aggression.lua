@@ -28,3 +28,9 @@ local function playerWeaponFireHandler()
     updatePlayerCooldown(source, getAggressionCooldown(0))
 end
 addEventHandler("onPlayerWeaponFire", root, playerWeaponFireHandler)
+
+local function playerReportAggressionHandler(aggression)
+    local cooldown = getAggressionCooldown(aggression) or 10
+    updatePlayerCooldown(source, cooldown)
+end
+addEventHandler("onPlayerReportAggression", root, playerReportAggressionHandler)

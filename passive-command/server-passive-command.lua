@@ -46,12 +46,6 @@ function updatePlayerCooldown(player, cooldownSeconds)
     return false
 end
 
-local function playerReportAggressionHandler(aggression)
-    local cooldown = getAggressionCooldown(aggression) or 10
-    updatePlayerCooldown(source, cooldown)
-end
-addEventHandler("onPlayerReportAggression", root, playerReportAggressionHandler)
-
 local function passiveCommandHandler(player)
     if hasPlayerCooldownExpired(player) then
         if passiveCommandPlayers[player] then
