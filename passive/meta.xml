@@ -1,0 +1,35 @@
+<meta>
+    <info author="yamsha@dzakub.com" type="script" name="passive" version="1.0.0"
+        description="resource managing no-collision and no-aggression passive mode for 
+            elements and players" />
+
+    <script src="imports/shared-imports.lua" type="shared" />
+    <script src="imports/server-imports.lua" type="server" />
+    <script src="imports/client-imports.lua" type="client" />
+
+    <script src="server-events.lua" type="server" />
+    <script src="client-events.lua" type="client" />
+
+    <script src="constants.lua" type="shared" />
+    <script src="utils.lua" type="shared" />
+    <script src="assert.lua" type="shared" />
+
+    <script src="server-requests.lua" type="server" />
+    <script src="server-passive.lua" type="server" />
+    <script src="server-passive-inheritance.lua" type="server" />
+    <script src="server-driveby.lua" type="server" />
+
+    <script src="client-passive.lua" type="client" />
+    <script src="client-aggression.lua" type="client" />
+    <script src="client-driveby.lua" type="client" />
+
+    <export function="canElementTypeBePassive" type="shared" />
+    <export function="isElementPassive" type="shared" />
+
+    <export function="createPassiveRequest" type="server" />
+    <export function="getPassiveRequests" type="server" />
+    <export function="doesPassiveRequestExist" type="server" />
+    <export function="removePassiveRequest" type="server" />
+
+    <export function="isLocalPlayerPassive" type="client" />
+</meta>

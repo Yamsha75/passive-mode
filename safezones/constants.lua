@@ -1,0 +1,1 @@
+SAFEZONE_ELEMENT_TYPE = "safe-zone"
