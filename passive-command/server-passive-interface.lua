@@ -19,8 +19,6 @@ function trySetPlayerPassiveEnabled(player, enabled)
 
     passivePlayers[player] = enabled or nil
 
-    print(player, enabled, passiveResource)
-
     if passiveResource then
         if enabled then
             call(passiveResource, "createPassiveRequest", player, PASSIVE_REQUEST_KEY)
