@@ -107,3 +107,10 @@ local function explosionHandler(x, y, z)
     end
 end
 addEventHandler("onClientExplosion", root, explosionHandler)
+
+local function resourceStartHandler(resource)
+    if getResourceName(resource) == DRIVEBY_RESOURCE_NAME then
+        triggerServerEvent("onPassivePlayerDrivebyResourceStart", localPlayer)
+    end
+end
+addEventHandler("onClientResourceStart", root, resourceStartHandler)

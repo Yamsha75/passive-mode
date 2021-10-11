@@ -4,15 +4,12 @@
 
     <include resource="passive" />
 
-    <script src="imports/shared-imports.lua" type="shared" />
-    <script src="imports/server-imports.lua" type="server" />
-    <script src="imports/client-imports.lua" type="client" />
-
     <script src="server-events.lua" type="server" />
 
     <script src="server-utils.lua" type="server" />
     <script src="server-assert.lua" type="server" />
 
+    <script src="server-passive-interface.lua" type="server" />
     <script src="server-passive-command.lua" type="server" />
     <script src="server-aggression.lua" type="server" />
 

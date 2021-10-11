@@ -1,6 +1,8 @@
 -- passiveElements[<element>] = true
 local passiveElements = {}
 
+local loadedClients = {}
+
 function canElementTypeBePassive(elementType)
     assertArgumentType(elementType, "string")
 
@@ -18,7 +20,9 @@ function setElementPassive(element, enabled)
     end
 
     triggerEvent("onElementPassiveModeChange", element, enabled)
-    triggerClientEvent("onClientElementPassiveModePreChange", element, enabled)
+    triggerClientEvent(
+        loadedClients, "onClientElementPassiveModePreChange", element, enabled
+    )
 
     return true
 end
@@ -38,23 +42,45 @@ end
 addEventHandler("onRequestElementPassiveModeStatus", root, sendElementPassiveModeStatus)
 
 local function sendAllPassiveElements()
+    for index, player in ipairs(loadedClients) do
+        if player == source then return false end
+    end
+
+    table.insert(loadedClients, client)
+
     for element, _ in pairs(passiveElements) do
-        triggerClientEvent(client, "onClientElementPassiveModePreChange", element, enabled)
+        triggerClientEvent(
+            client, "onClientElementPassiveModePreChange", element, enabled
+        )
     end
 end
 addEventHandler("onRequestAllPassiveElements", root, sendAllPassiveElements)
 
 -- cleanup
-local function disableDestroyedElementPassiveMode()
+local function playerQuitHandler()
+    for index, player in ipairs(loadedClients) do
+        if player == source then
+            table.remove(loadedClients, index)
+            break
+        end
+    end
+
     if isElementPassive(source) then
         -- skip triggering "onElementPassiveModePreChange"
         passiveElements[source] = nil
-
         triggerEvent("onElementPassiveModeChange", source, false)
     end
 end
-addEventHandler("onElementDestroy", root, disableDestroyedElementPassiveMode)
-addEventHandler("onPlayerQuit", root, disableDestroyedElementPassiveMode)
+addEventHandler("onPlayerQuit", root, playerQuitHandler)
+
+local function elementDestroyHandler()
+    if isElementPassive(source) then
+        -- skip triggering "onElementPassiveModePreChange"
+        passiveElements[source] = nil
+        triggerEvent("onElementPassiveModeChange", source, false)
+    end
+end
+addEventHandler("onElementDestroy", root, elementDestroyHandler)
 
 local function resourceStopHandler()
     -- clear passiveElements table so isElementPassive returns false

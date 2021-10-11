@@ -1,11 +1,7 @@
 local PASSIVE_MODE_COMMAND = "pasywny"
-local PASSIVE_REQUEST_KEY = "manual-command"
 local COMMAND_COOLDOWN = 5 -- seconds
 
 local AGGRESSION_LEVEL_COOLDOWNS = {[0] = 10, [1] = 30, [2] = 60}
-
--- passiveCommandPlayers[<player>] = <true>
-passiveCommandPlayers = createElementKeyedTable()
 
 -- timestamps at which each player can use the command
 -- passiveCooldownTimestamps[<player>] = <timestamp:integer>
@@ -48,22 +44,15 @@ end
 
 local function passiveCommandHandler(player)
     if hasPlayerCooldownExpired(player) then
-        if passiveCommandPlayers[player] then
-            outputChatBox("Wyłączono tryb pasywny", player)
-            passiveCommandPlayers[player] = nil
+        local enabled = not isPlayerPassiveEnabled(player)
 
-            if imports.passive then
-                imports.passive.removePassiveRequest(player, PASSIVE_REQUEST_KEY)
-            end
-        else
+        if enabled then
             outputChatBox("Włączono tryb pasywny", player)
-            passiveCommandPlayers[player] = true
-
-            if imports.passive then
-                imports.passive.createPassiveRequest(player, PASSIVE_REQUEST_KEY)
-            end
+        else
+            outputChatBox("Wyłączono tryb pasywny", player)
         end
 
+        trySetPlayerPassiveEnabled(player, enabled)
         updatePlayerCooldown(player, COMMAND_COOLDOWN)
     else
         local timeLeft = getCooldownTimeLeft(player)
@@ -75,22 +64,3 @@ local function passiveCommandHandler(player)
     end
 end
 addCommandHandler(PASSIVE_MODE_COMMAND, passiveCommandHandler)
-
-local function importedResourceStartHandler(resourceName)
-    if resourceName == "passive" then
-        for player, _ in pairs(passiveCommandPlayers) do
-            imports.passive.createPassiveRequest(player, PASSIVE_REQUEST_KEY)
-        end
-    end
-end
-addEventHandler("onImportedResourceStart", resourceRoot, importedResourceStartHandler)
-addEventHandler("onImportedResourceRestart", resourceRoot, importedResourceStartHandler)
-
-local function resourceStopHandler()
-    if imports.passive then
-        for player, _ in pairs(passiveCommandPlayers) do
-            imports.passive.removePassiveRequest(player, PASSIVE_REQUEST_KEY)
-        end
-    end
-end
-addEventHandler("onResourceStop", resourceRoot, resourceStopHandler)

@@ -4,10 +4,6 @@
 
     <include resource="passive" />
 
-    <script src="imports/shared-imports.lua" type="shared" />
-    <script src="imports/server-imports.lua" type="server" />
-    <script src="imports/client-imports.lua" type="client" />
-
     <script src="server-events.lua" type="server" />
     <script src="client-events.lua" type="client" />
 
@@ -16,7 +12,7 @@
     <script src="shared-assert.lua" type="shared" />
 
     <script src="server-safezones.lua" type="server" />
-    <script src="server-passive.lua" type="server" />
+    <script src="server-passive-interface.lua" type="server" />
 
     <script src="client-safezones.lua" type="client" />
     <script src="client-explosions.lua" type="client" />
