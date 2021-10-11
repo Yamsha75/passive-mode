@@ -2,6 +2,7 @@
     <info author="yamsha@dzakub.com" type="script" name="passive" version="1.0.0"
         description="resource managing no-collision and no-aggression passive mode for 
             elements and players" />
+    <min_mta_version server="1.3.0-9.04570" />
 
     <script src="imports/shared-imports.lua" type="shared" />
     <script src="imports/server-imports.lua" type="server" />
