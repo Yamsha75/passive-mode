@@ -35,10 +35,14 @@ end
 function formatSeconds(seconds)
     assertArgumentType(seconds, "number")
 
-    if seconds == 1 then return "1 sekunda" end
+    if seconds == 1 then return "1 sekundę" end
 
-    local lastDigit = seconds % 10
-    if lastDigit >= 2 and lastDigit <= 4 then return seconds .. " sekundy" end
+    local singlesDigit = seconds % 10
+    local tensDigit = (seconds % 100 - singlesDigit) / 10
+
+    if tensDigit ~= 1 and singlesDigit >= 2 and singlesDigit <= 4 then
+        return seconds .. " sekundy"
+    end
 
     return seconds .. " sekund"
 end
