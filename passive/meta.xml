@@ -10,14 +10,14 @@
     <script src="server-events.lua" type="server" />
     <script src="client-events.lua" type="client" />
 
-    <script src="constants.lua" type="shared" />
-    <script src="utils.lua" type="shared" />
-    <script src="assert.lua" type="shared" />
+    <script src="shared-constants.lua" type="shared" />
+    <script src="shared-utils.lua" type="shared" />
+    <script src="shared-assert.lua" type="shared" />
 
     <script src="server-requests.lua" type="server" />
     <script src="server-passive.lua" type="server" />
     <script src="server-passive-inheritance.lua" type="server" />
-    <script src="server-driveby.lua" type="server" />
+    <script src="server-driveby-interface.lua" type="server" />
 
     <script src="client-passive.lua" type="client" />
     <script src="client-aggression.lua" type="client" />
