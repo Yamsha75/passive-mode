@@ -1,15 +1,3 @@
--- distance from passive localPlayer below which explosions are cancelled
-local EXPLOSION_CANCEL_PROXIMITY = 7.0
-
--- player controls which are disabled in passive mode
-local AGGRESSIVE_CONTROLS_NAMES = {
-    "action",
-    "aim_weapon",
-    "fire",
-    "vehicle_fire", -- as a side-effect, disables bike jumping and nitro; will fix in the future
-    "vehicle_secondary_fire",
-}
-
 local function localPlayerPassiveModeChangeHandler(enabled)
     for _, controlName in ipairs(AGGRESSIVE_CONTROLS_NAMES) do
         toggleControl(controlName, not enabled)
