@@ -84,7 +84,7 @@ local function elementPassiveModeChangeHandler(enabled)
                 -- occupants should now stop inheriting passive from the vehicle
                 for seat, occupant in pairs(occupants) do
                     if doesPassiveRequestExist(occupant, OCCUPANT_REQUEST_KEY) then
-                        removePassiveRequesst(occupant, OCCUPANT_REQUEST_KEY)
+                        removePassiveRequest(occupant, OCCUPANT_REQUEST_KEY)
                     end
                 end
             end
