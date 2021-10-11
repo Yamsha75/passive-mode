@@ -1,6 +1,35 @@
+local function updateVehicleFireControl(enabled)
+    toggleControl(VEHICLE_FIRE_CONTROL_NAME, enabled)
+end
+
+local function elementStreamInHandler()
+    if getElementType(source) == "vehicle" and source ==
+        getPedDrivenVehicle(localPlayer) and isLocalPlayerPassive() then
+        -- most likely localPlayer's vehicle model changed
+        local enabled = not isVehicleArmed(source)
+        updateVehicleFireControl(enabled)
+    end
+end
+addEventHandler("onClientElementStreamIn", root, elementStreamInHandler)
+
+local function localPlayerVehicleEnter(vehicle, seat)
+    if seat == 0 and isLocalPlayerPassive() then
+        local enabled = not isVehicleArmed(vehicle)
+        updateVehicleFireControl(enabled)
+    end
+end
+addEventHandler("onClientPlayerVehicleEnter", localPlayer, localPlayerVehicleEnter)
+
 local function localPlayerPassiveModeChangeHandler(enabled)
     for _, controlName in ipairs(AGGRESSIVE_CONTROLS_NAMES) do
         toggleControl(controlName, not enabled)
+    end
+
+    local vehicle = getPedDrivenVehicle(localPlayer)
+    if enabled and vehicle and not isVehicleArmed(vehicle) then
+        -- player is in an unarmed vehicle and is enabling passive; do nothing
+    else
+        updateVehicleFireControl(not enabled)
     end
 end
 addEventHandler(

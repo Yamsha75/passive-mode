@@ -6,6 +6,20 @@ AGGRESSIVE_CONTROLS_NAMES = {
     "action",
     "aim_weapon",
     "fire",
-    "vehicle_fire", -- as a side-effect, disables bike jumping and nitro; will fix in the future
     "vehicle_secondary_fire",
+}
+
+-- this control is handled separately to enable bike jumping and nitro while passive
+VEHICLE_FIRE_CONTROL_NAME = "vehicle_fire"
+
+-- vehicles with weapons or water cannons
+ARMED_VEHICLES = {
+    [407] = true, -- Fire Truck
+    [425] = true, -- Hunter
+    [430] = true, -- Predator
+    [432] = true, -- Rhino
+    [447] = true, -- Seasparrow
+    [464] = true, -- RC Baron
+    [476] = true, -- Rustler
+    [601] = true, -- S.W.A.T.
 }

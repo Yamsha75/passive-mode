@@ -17,6 +17,7 @@
     <script src="server-driveby-interface.lua" type="server" />
 
     <script src="client-constants.lua" type="client" />
+    <script src="client-utils.lua" type="client" />
     <script src="client-passive.lua" type="client" />
     <script src="client-aggression.lua" type="client" />
 
