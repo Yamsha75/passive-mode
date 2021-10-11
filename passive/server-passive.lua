@@ -49,6 +49,8 @@ local function sendAllPassiveElements()
     table.insert(loadedClients, client)
 
     for element, _ in pairs(passiveElements) do
+        local enabled = isElementPassive(element)
+
         triggerClientEvent(
             client, "onClientElementPassiveModePreChange", element, enabled
         )
