@@ -2,7 +2,7 @@
     <info author="yamsha@dzakub.com" type="script" name="passive" version="1.0.0"
         description="resource managing no-collision and no-aggression passive mode for 
             elements and players" />
-    <min_mta_version server="1.3.0-9.04570" />
+    <min_mta_version server="1.3.0-9.04570" client="1.5.8-9.20837" />
 
     <script src="server-events.lua" type="server" />
     <script src="client-events.lua" type="client" />

@@ -19,6 +19,14 @@ addEventHandler(
     "onClientElementPassiveModeChange", localPlayer, localPlayerPassiveModeChangeHandler
 )
 
+local function localPlayerInteriorChangeHandler()
+    if isLocalPlayerPassive() then
+        -- workaround for interiors resource re-enabling player controls
+        setTimer(localPlayerPassiveModeChangeHandler, 500, 1, true)
+    end
+end
+addEventHandler("onClientElementInteriorChange", localPlayer, localPlayerInteriorChangeHandler)
+
 local function pedDamageHandler(attacker)
     if isElementPassive(source) or (attacker and isElementPassive(attacker)) then
         -- passive peds/players can't damage any peds/players;
