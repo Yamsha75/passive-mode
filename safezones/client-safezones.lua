@@ -21,7 +21,7 @@ end
 local function createSafeZoneHandler(colshape)
     addEventHandler("onClientColShapeHit", source, safeZoneColshapeHitHandler)
     addEventHandler("onClientColShapeLeave", source, safeZoneColshapeLeaveHandler)
-    addEventHandler("onClientElementDestroy", source, safeZoneDestroyHandler)
+    addEventHandler("onClientElementDestroy", source, safeZoneDestroyHandler, false)
 
     -- trigger safezone enter events for elements initially within colshape
     local colshapeDimension = getElementDimension(colshape)
