@@ -13,7 +13,9 @@ local function localPlayerInteriorChangeHandler()
         setTimer(localPlayerPassiveModeChangeHandler, 500, 1, true)
     end
 end
-addEventHandler("onClientElementInteriorChange", localPlayer, localPlayerInteriorChangeHandler)
+addEventHandler(
+    "onClientElementInteriorChange", localPlayer, localPlayerInteriorChangeHandler
+)
 
 local function pedDamageHandler(attacker)
     if isElementPassive(source) or (attacker and isElementPassive(attacker)) then
