@@ -35,6 +35,8 @@ addEventHandler("onClientCreateSafeZone", root, createSafeZoneHandler)
 
 -- triggering safezone exit events for elements within colshape on safezone destroy
 function safeZoneDestroyHandler()
+    if not isElement(source) then return end
+
     local colshape = getElementParent(source)
     if not colshape or getElementType(colshape) ~= "colshape" then return end
 
