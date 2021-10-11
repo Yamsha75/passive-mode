@@ -1,0 +1,17 @@
+<meta>
+    <info author="yamsha@dzakub.com" type="script" name="passive-command" version="1.0.0"
+        description="player command for enabling passive-mode" />
+
+    <include resource="passive" />
+
+    <script src="server-events.lua" type="server" />
+
+    <script src="server-utils.lua" type="server" />
+    <script src="server-assert.lua" type="server" />
+
+    <script src="server-passive-interface.lua" type="server" />
+    <script src="server-passive-command.lua" type="server" />
+    <script src="server-aggression.lua" type="server" />
+
+    <script src="client-aggression.lua" type="client" />
+</meta>

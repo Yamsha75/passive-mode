@@ -1,0 +1,22 @@
+<meta>
+    <info author="yamsha@dzakub.com" type="script" name="safezones" version="1.0.0"
+        description="resource managing no-aggression and no-collision zones" />
+
+    <include resource="passive" />
+
+    <script src="server-events.lua" type="server" />
+    <script src="client-events.lua" type="client" />
+
+    <script src="shared-constants.lua" type="shared" />
+    <script src="shared-utils.lua" type="shared" />
+    <script src="shared-assert.lua" type="shared" />
+
+    <script src="server-safezones.lua" type="server" />
+    <script src="server-passive-interface.lua" type="server" />
+
+    <script src="client-safezones.lua" type="client" />
+    <script src="client-explosions.lua" type="client" />
+    <script src="client-projectiles.lua" type="client" />
+
+    <export function="createSafeZone" type="shared" />
+</meta>
